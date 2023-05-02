@@ -22,7 +22,7 @@ public class LogController {
         this.logService = logService;
     }
     @GetMapping("/info/")
-    public ResponseEntity<Object> getLogs(@RequestParam(name = "id") String id) {
+    public CompletableFuture<ResponseEntity<Object>> getLogs(@RequestParam(name = "id") String id) {
         return logService.getLogsByUserId(id);
     }
 
@@ -32,7 +32,7 @@ public class LogController {
     }
 
     @PostMapping("/enter/")
-    public ResponseEntity<Object> enterLog(@RequestParam(name = "id") String id) {
+    public CompletableFuture<ResponseEntity<Object>> enterLog(@RequestParam(name = "id") String id) {
         return logService.enterLog(id);
     }
 
