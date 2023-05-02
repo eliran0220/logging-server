@@ -34,7 +34,7 @@ public class LogService {
              Helper.addNoExitIfNeeded(logs);
              return CompletableFuture.completedFuture(ResponseHandler.generateInfoResponse(HttpStatus.OK, map));
          } catch (Exception e) {
-             return CompletableFuture.failedFuture(e);
+             return CompletableFuture.completedFuture(ResponseHandler.generateGeneralResponse(Constants.GENERAL_ERROR, HttpStatus.BAD_REQUEST));
          }
     }
     @Async("asyncExecutor")
