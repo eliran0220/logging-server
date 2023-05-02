@@ -1,9 +1,7 @@
 package com.example.LogSystem.controller;
 
 import com.example.LogSystem.service.LogService;
-import com.example.LogSystem.utils.ResponseHandler;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +12,7 @@ import java.util.concurrent.CompletableFuture;
 
 @RestController
 public class LogController {
+    @Autowired
     private LogService logService;
 
     @Autowired
