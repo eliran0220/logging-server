@@ -1,6 +1,5 @@
 package com.example.LogSystem.controller;
 
-import com.example.LogSystem.exceptions.GeneralException;
 import com.example.LogSystem.service.LogService;
 import com.example.LogSystem.utils.ResponseHandler;
 import org.springframework.beans.factory.annotation.Autowired;
