@@ -37,7 +37,7 @@ public class LogController {
     }
 
     @PostMapping("/exit/")
-    public ResponseEntity<Object> exitLog(@RequestParam(name = "id") String id) {
+    public CompletableFuture<ResponseEntity<Object>> exitLog(@RequestParam(name = "id") String id) {
         return logService.exitLog(id);
     }
 

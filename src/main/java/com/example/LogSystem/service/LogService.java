@@ -20,18 +20,18 @@ public class LogService {
         this.logMap = new HashMap<>();
     }
     @Async("asyncExecutor")
-    public ResponseEntity<Object> getLogsByUserId(String userId) {
+    public CompletableFuture<ResponseEntity<Object>> getLogsByUserId(String userId) {
         ArrayList<ArrayList<Log>> logs = logMap.get(userId);
         Map<String, Object> map = new HashMap<>();
         map.put("employee_id", userId);
         map.put("dates",logs);
-        return ResponseHandler.generateInfoResponse(HttpStatus.OK,map);
+        return CompletableFuture.completedFuture(ResponseHandler.generateInfoResponse(HttpStatus.OK,map));
     }
     @Async("asyncExecutor")
-    public ResponseEntity<Object> enterLog(String userId) {
+    public CompletableFuture<ResponseEntity<Object>> enterLog(String userId) {
         if (logMap.containsKey((userId))) {
             if (validateLog("enter", userId)) {
-                return ResponseHandler.generateGeneralResponse("BAD REQUEST", HttpStatus.BAD_REQUEST);
+                return CompletableFuture.completedFuture(ResponseHandler.generateGeneralResponse("BAD REQUEST", HttpStatus.BAD_REQUEST));
             }
             ArrayList<ArrayList<Log>> logs = logMap.get(userId);
             Log log = new Log("enter",new Date().toString());
@@ -46,22 +46,22 @@ public class LogService {
             list.add(log);
             logMap.put(userId,logsList);
         }
-        return ResponseHandler.generateGeneralResponse("OK", HttpStatus.OK);
+        return CompletableFuture.completedFuture(ResponseHandler.generateGeneralResponse("OK", HttpStatus.OK));
     }
 
     @Async("asyncExecutor")
-    public ResponseEntity<Object> exitLog(String userId) {
+    public CompletableFuture<ResponseEntity<Object>> exitLog(String userId) {
         if (logMap.containsKey((userId))) {
             if (validateLog("exit",userId)) {
-                return ResponseHandler.generateGeneralResponse("BAD REQUEST", HttpStatus.BAD_REQUEST);
+                return CompletableFuture.completedFuture(ResponseHandler.generateGeneralResponse("BAD REQUEST", HttpStatus.BAD_REQUEST));
             }
             ArrayList<ArrayList<Log>> logs = logMap.get(userId);
             ArrayList<Log> lastLogArray = logs.get(logs.size() - 1);
             Log log = new Log("exit",new Date().toString());
             lastLogArray.add((log));
-            return ResponseHandler.generateGeneralResponse("OK", HttpStatus.OK);
+            return CompletableFuture.completedFuture(ResponseHandler.generateGeneralResponse("OK", HttpStatus.OK));
         } else {
-            return ResponseHandler.generateGeneralResponse("BAD REQUEST", HttpStatus.BAD_REQUEST);
+            return CompletableFuture.completedFuture(ResponseHandler.generateGeneralResponse("BAD REQUEST", HttpStatus.BAD_REQUEST));
         }
     }
 
