@@ -1,5 +1,10 @@
 package com.example.LogSystem.model;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 public class Log {
     private String description;
     private String date;
@@ -25,4 +30,6 @@ public class Log {
     public void setDate(String date) {
         this.date = date;
     }
+
+
 }
